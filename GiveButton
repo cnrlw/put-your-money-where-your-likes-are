@@ -1,0 +1,108 @@
+import React, { useState } from "react"
+
+/**
+ * @framerSupportedLayoutWidth any
+ * @framerSupportedLayoutHeight fixed
+ */
+
+// Styles are written in object syntax
+// Learn more: https://reactjs.org/docs/dom-elements.html#style
+const container = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "left",
+    gap: "0",
+    // background: "#cecece",
+}
+
+const amount = {
+    FontFace: "system-ui",
+    fontWeight: "600",
+    fontSize: "40px",
+    lineHeight: "1em",
+    color: "black",
+    margin: 0,
+}
+
+const slideContainer = {
+    margin: "0px 16px 0px 0px",
+    minWidth: "320px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    boxSizing: "border-box",
+}
+
+const slider = {
+    appearance: "none",
+    display: "flex",
+    width: "100%",
+}
+
+const button = {
+    appearance: "none",
+    padding: "24px 16px",
+    height: "88px",
+    fontFamily:
+        "'system-ui', '-apple-system','BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, 'System Default', serif",
+    fontWeight: "500",
+    fontSize: "16px",
+    borderRadius: 44,
+    border: "0px white solid",
+    WebkitBoxShadow:
+        "rgba(0, 0, 0, 0.06) 0px 8px 6px, rgba(0, 0, 0, 0.08) 0px -4px 8px inset, rgba(255, 255, 255, 0.32) 0px 4px 12px inset",
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    color: "rgba(0, 0, 0, 1)",
+    textShadow: "hsl(0deg 0% 100%) 0px 2px 2px",
+    cursor: "pointer",
+}
+
+export default function Amount_Picker(props) {
+    // This is a React component containing an Example component
+    // - Replace <Example /> with your own code
+    // - Find inspiration: https://www.framer.com/developers/
+    const [value, setValue] = useState(0.08) // Initial value
+
+    const handleChange = (event) => {
+        setValue(event.target.value)
+    }
+
+    const successAnimation = () => {
+        // alert("success")
+    }
+
+    const handleSendAmount = () => {
+        // Here we are just changing the URL in the browser.
+        // Replace with your own logic (like making an HTTP request)
+        successAnimation()
+
+        window.location.href = `/give-thanks?amount=${value}`
+        // window.location.href = `https://www.paypal.com/paypalme/cnrlw/${value}`
+    }
+
+    return (
+        <div style={container}>
+            <p style={amount} className="">
+                ${value}
+            </p>
+            <div style={slideContainer}>
+                <input
+                    type="range"
+                    value={value}
+                    onChange={handleChange}
+                    min=".08"
+                    max="88.8"
+                    step=".08"
+                    className="slider"
+                    id="myFramerate"
+                    style={slider}
+                />
+            </div>
+            <button style={button} onClick={handleSendAmount}>
+                Support future ideas
+            </button>
+        </div>
+    )
+}
